@@ -1,0 +1,37 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>100</x><y>480</y><w>610</w><h>450</h></coordinates><panel_attributes>_Recorder_
+--
+- m_dir: std::string
+- m_db: std::string
+- m_dbh: void *
+- m_last_error: struct {
+        rc: int
+        desc: std::string
+    }
+--
++ Recorder();
++ Recorder(in dir:std::string &amp;, in db:std::string &amp;="record_gb17691.sqlite3")
++ ~Recorder();
++ Init(): SMLK_UINT32
++ Open(): SMLK_UINT32
++ Close(): void
++ Insert(in id:SMLK_UINT32, in flag:SMLK_UINT8, in data:SMLK_UINT8 [], in sz:std::size_t): SMLK_UINT32
++ Insert(in id:SMLK_UINT32, in flag:SMLK_UINT8, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32
++ Update(in id:SMLK_UINT32, in flag:SMLK_UINT8 ): SMLK_UINT32
++ Update(in ids:std::vector&lt;SMLK_UINT32&gt; &amp;, in flag:SMLK_UINT8 ): SMLK_UINT32
++ Query(in id:SMLK_UINT32, in flag:SMLK_UINT8 &amp;, in data:SMLK_UINT8 [], in sz:std::size_t &amp;): SMLK_UINT32
++ Query(in id:SMLK_UINT32, in flag:SMLK_UINT8 &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32
++ Delete(in id:SMLK_UINT32): SMLK_UINT32
++ Delete(in ids:std::vector&lt;SMLK_UINT32&gt; &amp;): SMLK_UINT32
++ QueryWhereFlag(in flag:SMLK_UINT8, inout records:std::vector&lt;Record&gt; &amp;, 
+                                in id_from:SMLK_UINT32 = 0x00000000, 
+                                in id_to:SMLK_UINT32 = 0xFFFFFFFF, 
+                                in limit:std::size_t = 16): SMLK_UINT32
++ LastError(): std::string &amp; const
+- LastError(in rc:int, in err:char *): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>785</x><y>620</y><w>210</w><h>120</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+_Flags:SMLK_UINT8_
+--
+login = 0x01 
+realtime = 0x02
+reissue = 0x03
+logout = 0x04
+ignore = 0xFF</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>695</x><y>550</y><w>110</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;150;40;150;40;10;10;10</additional_attributes></element></diagram>

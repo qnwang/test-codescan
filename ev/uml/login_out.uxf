@@ -1,0 +1,125 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>_MessageObserver32960_
+--
++ msgSendCallback32960: typedef std::function&lt;int(char *, uint)&gt;
+
+- m_instance: MessageObserver32960 * m_instance
+- m_mtx: std::mutex static
+- ServerVec: std::vector &lt;std::pair&lt;msgID_32960, IMessage *&gt;&gt;
+- m_callBack: msgSendCallback32960
+--
++ GetInstance(): MessageObserver32960 * static
++ EndianSwap(in pData:uint8_t *, in startIndex:int, in length:int): void
++ decodeMsg(in src:char *, in length:uint ): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint): int
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint, in dest:char *, in msgLength:uint &amp;): int
++ resendMsg(in buf:char *, in len:uint): int
++ RegisterDataSendCB(in cb:msgSendCallback32960): void
++ AttachObserver(in id:msgID_32960, in MessageOb:IMessage *): void
++ DetachObserver(): void
++ NotifyObserver(in id:msgID_32960, in messageContent:char *, in len:uint): void
++ NotifyMsgAck(in msgId:uint, in rspFlag:uint ): void_MessageObserver32960_
+--
++ msgSendCallback32960: typedef std::function&lt;int(char *, uint)&gt;
+
+- m_instance: MessageObserver32960 * m_instance
+- m_mtx: std::mutex static
+- ServerVec: std::vector &lt;std::pair&lt;msgID_32960, IMessage *&gt;&gt;
+- m_callBack: msgSendCallback32960
+--
++ GetInstance(): MessageObserver32960 * static
++ EndianSwap(in pData:uint8_t *, in startIndex:int, in length:int): void
++ decodeMsg(in src:char *, in length:uint ): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint): int
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint, in dest:char *, in msgLength:uint &amp;): int
++ resendMsg(in buf:char *, in len:uint): int
++ RegisterDataSendCB(in cb:msgSendCallback32960): void
++ AttachObserver(in id:msgID_32960, in MessageOb:IMessage *): void
++ DetachObserver(): void
++ NotifyObserver(in id:msgID_32960, in messageContent:char *, in len:uint): void
++ NotifyMsgAck(in msgId:uint, in rspFlag:uint ): void_MessageObserver32960_
+--
++ msgSendCallback32960: typedef std::function&lt;int(char *, uint)&gt;
+
+- m_instance: MessageObserver32960 * m_instance
+- m_mtx: std::mutex static
+- ServerVec: std::vector &lt;std::pair&lt;msgID_32960, IMessage *&gt;&gt;
+- m_callBack: msgSendCallback32960
+--
++ GetInstance(): MessageObserver32960 * static
++ EndianSwap(in pData:uint8_t *, in startIndex:int, in length:int): void
++ decodeMsg(in src:char *, in length:uint ): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint): int
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint, in dest:char *, in msgLength:uint &amp;): int
++ resendMsg(in buf:char *, in len:uint): int
++ RegisterDataSendCB(in cb:msgSendCallback32960): void
++ AttachObserver(in id:msgID_32960, in MessageOb:IMessage *): void
++ DetachObserver(): void
++ NotifyObserver(in id:msgID_32960, in messageContent:char *, in len:uint): void
++ NotifyMsgAck(in msgId:uint, in rspFlag:uint ): void&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;460&lt;/x&gt;&lt;y&gt;770&lt;/y&gt;&lt;w&gt;80&lt;/w&gt;&lt;h&gt;120&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;60;10;60;60;10;60;10;100&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;420&lt;/x&gt;&lt;y&gt;550&lt;/y&gt;&lt;w&gt;200&lt;/w&gt;&lt;h&gt;130&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;180;110;180;50;10;50;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;740&lt;/x&gt;&lt;y&gt;550&lt;/y&gt;&lt;w&gt;290&lt;/w&gt;&lt;h&gt;130&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;110;10;50;270;50;270;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1343</x><y>540</y><w>550</w><h>100</h></coordinates><panel_attributes>_IMessage_
+--
+--
++ decodeMsg(in rawData:char *, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint, in dest:char *, in msgLength:uint &amp;): void 
++ broadcastMsgAck(in msgId:uint, in rspFlag:uint): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>702</x><y>240</y><w>550</w><h>410</h></coordinates><panel_attributes>_MessageVehicleLogin32960_
+--
+- m_vehicleLoginData: GB_32960_VehicleLogin
+- m_MessageEntity32960: GB_32960_MsgEntity
+- loginTimer: EV_Timer * static
+- curTryNum: int
+- maxRetryNum: int
+- nextLoginIntervalTime: int
+- curWaitTime: int
+- maxWaitTime: int
+- logining: bool
+- nextLoginFlag: bool
+- nextLoginWaitTime: int
+--
++ MessageVehicleLogin32960()
++ ~MessageVehicleLogin32960()
+
++ decodeMsg(in rawData:char *, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint, in dest:char *, in msgLength:uint &amp;): void 
++ broadcastMsgAck(in msgId:uint, in rspFlag:uint): void
++ DoVehicleLogin(): void
++ delLoginTimer(): void static
+
+- loginInit(): void static
+- loginLoop(): void static
+- addLoginTimer(): int static
+- checkLoginTimer(): int static
+
+    </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>752</y><w>550</w><h>200</h></coordinates><panel_attributes>_MessageVehLogout32960_
+--
+- m_vehicleLogoutData: GB_32960_VehicleLogout
+- m_MessageEntity32960: GB_32960_MsgEntity
+
+--
++ MessageVehLogout32960()
++ ~MessageVehLogout32960()
+
++ decodeMsg(in rawData:char *, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in length:uint, in dest:char *, in msgLength:uint &amp;): void 
++ broadcastMsgAck(in msgId:uint, in rspFlag:uint): void
++ DoVehLogout(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>531</y><w>570</w><h>290</h></coordinates><panel_attributes>_MessageObserver32960_
+--
++ msgSendCallback32960: typedef std::function&lt;int(char *, uint)&gt;
+
+- m_instance: MessageObserver32960 * m_instance
+- m_mtx: std::mutex static
+- ServerVec: std::vector &lt;std::pair&lt;msgID_32960, IMessage *&gt;&gt;
+- m_callBack: msgSendCallback32960
+--
++ GetInstance(): MessageObserver32960 * static
++ EndianSwap(in pData:uint8_t *, in startIndex:int, in length:int): void
++ decodeMsg(in src:char *, in length:uint ): void
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint): int
++ encodeMsg(in entity:GB_32960_MsgEntity, in bodyLength:uint, in dest:char *, in msgLength:uint &amp;): int
++ resendMsg(in buf:char *, in len:uint): int
++ RegisterDataSendCB(in cb:msgSendCallback32960): void
++ AttachObserver(in id:msgID_32960, in MessageOb:IMessage *): void
++ DetachObserver(): void
++ NotifyObserver(in id:msgID_32960, in messageContent:char *, in len:uint): void
++ NotifyMsgAck(in msgId:uint, in rspFlag:uint ): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>340</y><w>230</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10;10;190</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>810</y><w>230</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;80;10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1240</x><y>600</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1240</x><y>630</y><w>280</w><h>280</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>260;10;260;260;10;260</additional_attributes></element></diagram>

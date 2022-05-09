@@ -1,0 +1,144 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>610</x><y>89</y><w>500</w><h>270</h></coordinates><panel_attributes>LoggerClient
+--
+-m_sp_ftp: std::shared_ptr&lt;FtpPushWithNonBlock&gt;
+-m_msg_queue: Queue&lt;TspCmdQueue&gt;
+-m_queue_mutex: std::mutex
+-m_sp_event_collector: std::shared_ptr&lt;logger::EventCollector&gt;
+--
+&lt;&lt;create&gt;&gt;+LoggerClient() explicit
+&lt;&lt;distroy&gt;&gt;+~LoggerClient()
++void run() override
+-void OnTspIndication(IN IpcTspHead &amp;ipc_head, IN void* data, std::size_t len);
+-void DealF52Action(IN TspCmdQueue&amp; msg);
+-void DealF53Action(IN TspCmdQueue&amp; msg);
+-void SendCommonResp(IN TspCmdQueue&amp; msg, CommonRC result);
+-void SendActionResp(IN TspCmdQueue&amp; msg, IN SMLK_UINT8* buf, std::size_t len);
+-bool GetLogFiles(IN string&amp; path, SMLK_UINT32 time_start,
+                                      SMLK_UINT32 time_end,
+                                      std::vector&lt;string&gt;&amp; files,
+                                      const std::string&amp; split_str,
+                                      SMLK_UINT8 log_type = 0);
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>260</x><y>419</y><w>300</w><h>210</h></coordinates><panel_attributes>TspCmdQueue
+--
+-m_head: LoggerHead
+-m_f52_data: F52Data
+-m_f53_general: F53General
+-m_ftp_info: FtpInfo
+-m_f53_cmd_0: F53CMD_0
+-m_f53_1_files: std::vector&lt;std::string&gt;
+--
+-TspCmdQueue() {
+        bzero(&amp;m_f52_data, sizeof(F52Data));
+        bzero(&amp;m_f53_general, sizeof(F53General));
+        bzero(&amp;m_f53_cmd_0, sizeof(F53CMD_0));
+    }</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>469</y><w>210</w><h>130</h></coordinates><panel_attributes>_LoggerHead: Struct_
+--
+msg_id: SMLK_UINT32
+seq_id: SMLK_UINT32
+protocol: SMLK_UINT8
+qos: SMLK_UINT8
+priority: SMLK_UINT8
+reserved_dw: SMLK_UINT32</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>349</y><w>210</w><h>70</h></coordinates><panel_attributes>_F52Data: Struct_
+--
+cmd_type: SMLK_UINT8
+cmd_content: SMLK_UINT8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>229</y><w>210</w><h>80</h></coordinates><panel_attributes>_F53CMD_0: Struct_
+--
+log_path[6]: char
+start_time[6]: SMLK_UINT8
+end_time[6]: SMLK_UINT8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>269</y><w>150</w><h>80</h></coordinates><panel_attributes>_CommResp: Struct_
+--
+seq_id: SMLK_UINT16
+msg_id: SMLK_UINT16
+result: SMLK_UINT8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>649</y><w>210</w><h>80</h></coordinates><panel_attributes>_F53General: Struct_
+--
+time[6]: SMLK_UINT8
+general_type: SMLK_UINT8
+log_type: SMLK_UINT8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>119</y><w>210</w><h>80</h></coordinates><panel_attributes>_LogFileAttribute: Struct_
+--
+log_id: SMLK_UINT8
+log_name[128]: SMLK_UINT8
+log_size: SMLK_UINT16</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>439</y><w>290</w><h>180</h></coordinates><panel_attributes>template=T: Class
+Queue
+--
+-m_q: std::queue&lt;T&gt;
+-m_mutex: mutable std::mutex
+-m_cv: std::condition_variable
+--
++put(t:T): void
++get(in timeout_ms:int): std::tuple&lt;bool T&gt;
++operator bool(): bool const
++size(): std::size_t const
++empty(): bool const</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>349</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>239</y><w>230</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>349</y><w>190</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.
+
+&lt;&lt;templete&gt;&gt;</panel_attributes><additional_attributes>170;100;170;20;10;20;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>510</y><w>340</w><h>210</h></coordinates><panel_attributes>smartlink::Decoder8F53_2
+--
+-host_: std::string
+-usrname_: std::string
+-passwd_: std::string
+-server_path_: std::string
+-port_: SMLK_UINT16
+-file_lists: std::vector&lt;string&gt;
+--
+&lt;&lt;create&gt;&gt;+Decoder8F53_2()
+&lt;&lt;distroy&gt;&gt;+~Decoder8F53_2()
++void Decode(IN SMLK_UINT8* data, IN std::size_t len);
+--
++BCD2ASCII(const string &amp;str): inline string
++ASCII2BCD(const string &amp;str): inline string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>348</y><w>30</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>55</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Extends&gt;&gt;
+Poco::Runnable
+--
++run(): void override</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>115</y><w>240</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50;220;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1220</x><y>451</y><w>690</w><h>260</h></coordinates><panel_attributes>smartlink::FtpPushWithNonBlock
+--
+-m_ftp_info: FtpInfo
+-m_timeout: SMLK_UINT16
+-m_files_list: std::vector&lt;string&gt;
+-m_listener: FtpPusherListener
+-m_sp_ftp_pusher: shared_ptr&lt;FtpPusher&gt;
+-m_task_thread: std::thread
+--
+-pushProcess(): void
+--
+&lt;&lt;create&gt;&gt;+FtpPushWithNonBlock(IN FtpInfo&amp; info)
+&lt;&lt;distory&gt;&gt;+virtual ~FtpPushWithNonBlock()
++using FtpPusherListener = std::function&lt;void(FtpErrorCode)&gt;
++upLoadFile(IN string&amp; filePath, SMLK_UINT16 timeout, FtpPusherListener listener): FtpPushWithNonBlock*
++upLoadFile(IN std::vector&lt;string&gt;&amp; files, SMLK_UINT16 timeout, FtpPusherListener listener): FtpPushWithNonBlock*
++start(): void
++close(): void
++abort(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1100</x><y>221</y><w>140</w><h>290</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10;50;270;120;270</additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>640</y><w>340</w><h>130</h></coordinates><panel_attributes>smartlink::FtpInfo
+--
+-host: std::string
+-user: std::string
+-passwd: std::string
+-server_path: std::string
+-port: SMLK_UINT16
+--
+-operator = (IN FtpInfo&amp; other): FtpInfo&amp;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>705</y><w>630</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.
+&lt;&lt;FtpInfo&gt;&gt;</panel_attributes><additional_attributes>10;50;610;50;610;10</additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>155</y><w>150</w><h>290</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;130;10;130;270</additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>265</y><w>120</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;100;10;100;160</additional_attributes></element><element><id>Relation</id><coordinates><x>222</x><y>375</y><w>80</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;60;10;60;50</additional_attributes></element><element><id>Relation</id><coordinates><x>222</x><y>525</y><w>60</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>42</x><y>605</y><w>240</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>50;90;10;90;10;10;220;10</additional_attributes></element><element><id>Relation</id><coordinates><x>562</x><y>295</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>347</x><y>615</y><w>60</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>40;90;10;90;10;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>1280</x><y>726</y><w>140</w><h>30</h></coordinates><panel_attributes>FtpInfo</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1360</x><y>396</y><w>280</w><h>30</h></coordinates><panel_attributes>/FtpPusher: public Poco::Net::FTPClientSession/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1630</x><y>404</y><w>60</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;40;10;40;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1260</x><y>0</y><w>570</w><h>370</h></coordinates><panel_attributes>smartlink::logger::EventCollector
+--
+-m_imsi_str: std::string
+-m_pre_line_short: SMLK_UINT16
+-m_event_switch: std::atomic&lt;SMLK_BOOL&gt;
+-m_act_log_switch: std::atomic&lt;SMLK_BOOL&gt;
+-m_event_thread: std::thread
+-m_act_tsp_log_thread: std::thread
+-m_act_msg_log_thread: std::thread
+-m_log_level: int*
+-m_cur_log_level: int
+-m_shmd_id: int
+--
+&lt;&lt;create&gt;&gt;+EventCollector()
+&lt;&lt;distroy&gt;&gt;+~EventCollector()
++Init(): void
++Stop(): void
++SwitchEvent(SMLK_BOOL): void
++SwitchActiveLog(SMLK_BOOL, SMLK_UINT8 log_type): void
++SetOfflineLogLevel(LogLevel): void
++GetOfflineLogLevel(): LogLevel
++GetImsiStr(): std::string&amp;
+--
+-GetLastPreviousLogFileCursorWithLine(std::fstream&amp; stream, IN std::string&amp; path): std::size_t
+--
+#ProcessEvent(): void
+#ProcessActiveLog(IN std::string&amp; path): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1100</x><y>150</y><w>180</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;160;10</additional_attributes></element></diagram>

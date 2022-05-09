@@ -1,0 +1,32 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>320</x><y>660</y><w>400</w><h>330</h></coordinates><panel_attributes>_SqlLiteBase_
+--
+- m_protocolName: std::string
+- m_sendMsgDate: std::string
+- m_todayTable: std::string 
+- m_readingTable: std::string 
+- m_listTableDesc: std::vector &lt;std::string&gt;
+- m_listTableAsc: std::vector &lt;std::string&gt;
+--
++ SqlLiteBase()
++ ~SqlLiteBase()
++ Init(): SMLK_RC
++ upgrade(): void
++ InitTable(): void
++ WriteBlindData(in buf:char *, in len:int): void
++ ReadBlindData(in buf:char *, in len:int &amp;): void
++ UpdateMsgFlag(): void
+
+- SetCurTabName(): void
+- GetTables(in isDesc:bool): void
+- FindNextTable(): void
+- DelNoUseDataTable(in table:string&amp;): void
+- CheckDBExist(in path:std::string&amp;): bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>440</y><w>400</w><h>150</h></coordinates><panel_attributes>_BaseSqlite_
+--
+- m_sessionPool: std::shared_ptr&lt;Poco::Data::SessionPool&gt; = nullptr
+- m_dbPath: std::string
+--
++ BaseSqlite(in dbPath:std::string &amp;)
++ ~BaseSqlite()
+
+- Init(): smartlink::SMLK_RC
+- upgrade(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>580</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element></diagram>

@@ -1,0 +1,40 @@
+{"configfile":[{
+		"default_timeout": 5,
+		"default_retrytimes": 0,
+		"default_retrydelay": 10
+	},
+	{
+		"cmd": 1,
+		"timeout": 5,
+		"max_sendtimes":3,
+		"retrydelay": 2,
+		"params": [{
+			"errcode": 1,
+			"retrytimes": 3
+		}]
+	},
+	{
+	 "cmd": 2,
+                "timeout": 5,
+                "max_sendtimes":3,
+                "retrydelay": 2,
+                "params": [{
+                        "errcode": 1,
+                        "retrytimes": 2
+                },
+		{		
+                        "errcode": 12,
+                        "retrytimes": 3
+
+		
+		}]
+
+	
+	
+	
+	
+	
+	
+	}
+
+]}

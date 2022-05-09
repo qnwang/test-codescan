@@ -1,0 +1,8 @@
+include_directories("inc")
+include_directories("/usr/include/jsoncpp")
+set(BIN "daq-sim")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+file(GLOB SRC  "src/*.cpp")
+add_executable(${BIN} ${SRC})
+target_link_libraries(${BIN} jsoncpp)

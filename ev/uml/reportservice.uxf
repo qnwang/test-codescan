@@ -1,0 +1,158 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>100</x><y>158</y><w>460</w><h>690</h></coordinates><panel_attributes>_ReportService_
+--
+- m_flags: SMLK_UINT32
+- m_internal_flags: SMLK_UINT32
+- m_vehicle_type: SMLK_UINT8
+- m_mutex: std::mutex
+- m_thread: std::thread
+- m_events: Queue&lt;CallableEvent&gt;
+
+- dm1info: ProtocolReporter::DM1::Info
+- union: InternalDTC typedef  {
+        id: SMLK_UINT32
+        dtc: struct {
+            SPN:19: SMLK_UINT32
+            FMI:5: SMLK_UINT32
+            SRC:8: SMLK_UINT32
+        }
+    }
+- DM1DataInfo: struct {
+        data_valid: SMLK_BOOL
+        cycle: SMLK_UINT32
+        tp: std::chrono::steady_clock::time_point
+    }
+- g_dm1_data_pool: std::unordered_map&lt;CAN_ID, DM1DataInfo&gt;
+- g_dm1_data_pool_mutex: std::mutex
+- m_check_timeout_timer: Poco::Timer
+
+- m_actived_dm1: std::set&lt;SMLK_UINT32&gt;
+- m_protocol_reporter: std::map&lt;SMLK_UINT8, std::shared_ptr&lt;Reporter&gt;&gt;
+--
++ ReportService()
++ ~ReportService()
++ Init(): SMLK_UINT32
++ Start(): SMLK_UINT32
++ Stop(): void
++ IsRunning():  bool const
+
+- Post(in head:MsgHead &amp;, in ptr:SMLK_UINT8 *, in sz:std::size_t): void
+- Post(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): void
+- Post(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;&amp;): void
+- HandleEvent(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): void
+- InitTimerOutCheck(): void
+- OnCheckDataValidTimeout(in Poco::Timer&amp;): void
+- OnDM1Notify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): void
+- OnMutiDataNotify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): void
+- OnLocationNotify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt; &amp;): void
+- GetGNSS(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>148</y><w>560</w><h>920</h></coordinates><panel_attributes>_Reporter_
+--
++ m_TcpClient32960: TCPClient * static
++ m_SqlLiteBase32960: SqlLiteBase * static
+- m_host: std::string
+- m_port: SMLK_UINT16
+- m_flags: SMLK_UINT32
+- m_press_1_warn_flags: SMLK_UINT32
+- m_press_2_warn_flags: SMLK_UINT32
+- m_reconnect_period: SMLK_UINT32
+- m_first_init: SMLK_BOOL
+- m_IsDoLogic: SMLK_BOOL
+- m_MessageOb: MessageObserver32960 * = nullptr
+- m_protocol_vehicle_login: MessageVehicleLogin32960 * = nullptr
+- m_protocol_vehicle_logout: MessageVehLogout32960 * = nullptr
+- m_protocol_realtime_report: MessageRealTimeInfo32960 * = nullptr
+- m_protocol_blindinfo_report: MessageBlindInfoUp32960 * = nullptr
+- m_protocol_heartbeat: MessageHeartBeat32960 * = nullptr
+- m_mutex: std::mutex
+- m_sendMtx: static std::mutex
+- m_thread: std::thread
+- m_events: Queue&lt;CallableEvent&gt;
+- m_cached_index_signals: std::unordered_map&lt;SMLK_UINT32, vehicle::SignalVariant &amp;&gt;
+- m_initMutex: std::mutex
+--
++ Reporter(in host:std::string &amp;, in port:SMLK_UINT16);
++ ~Reporter();
++ Init(): SMLK_UINT32
++ Start(): SMLK_UINT32
++ InitLogic(): void
++ Stop(): void
++ IsRunning(): bool const
+
++ SetCONFIG(in config:SMLK_UINT8): SMLK_UINT32
++ SetTORQUE(in torque:SMLK_UINT16): SMLK_UINT32
++ SetVIN(in vin:std::string &amp;): SMLK_UINT32
++ SetICCID(in iccid:std::string &amp;): SMLK_UINT32
++ SetIsSave(in save:SMLK_BOOL): SMLK_UINT32
++ SetTelephonyState(in info:ProtocolReporter::telephony::Info &amp;): SMLK_UINT32
++ IgnON(): void
++ IgnOFF(): void
+
++ UpdateSignalVal(in SMLK_UINT32 index, in SMLK_DOUBLE val, in SMLK_BOOL valid = true): void
++ UpdateDM1Info(in ProtocolReporter::DM1::Info &amp;info): void
++ UpdateGNSS(in ProtocolReporter::GNSS::Info &amp;info): void
++ SystemTimeSync(bool = true): void
+
++ Post(in head:MsgHead &amp;, in ptr:SMLK_UINT8 *, in sz:std::size_t): void
++ Post(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
++ Post(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;&amp;): void
+
+- HandleEvent(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+- OnDataChanged(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+- OnDM1Notify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+- OnLocationNotify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+- OnSystemTimeNotify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+- OnDIDNotify(in head:MsgHead &amp;, in data:std::vector&lt;SMLK_UINT8&gt;&amp;): void
+
+- HandleSendData2TSP32960(in data:char *, in length:uint): int static
+- HandleSocketConnState(in state:int): int static
+- ReceiveTSPData(in arg: *): void static
+- SocketMonitor(in arg:void *): void static
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1290</x><y>200</y><w>480</w><h>800</h></coordinates><panel_attributes>_common32960_
+--
++ m_SqlLiteBase32960: SqlLiteBase * = nullptr
++ m_TcpClient32960: TCPClient * = nullptr
++ m_AuthSignState: bool
++ m_ignState: int
++ m_loginout: bool
++ m_paramObj: struct PARAM_T
++ m_three_warn_level: bool
++ m_run_mode: SMLK_UINT8
++ m_todisk: bool
++ m_vin: SMLK_UINT8 [M_GB_32960_SZ_VIN]
++ m_iccid: SMLK_UINT8 [M_GB_32960_SZ_ICCID]
++ m_refer_torque: SMLK_UINT16
++ m_dm1info: DM1EventInfo
++ m_tempinfo: MDATAInfo
++ m_voltinfo: MDATAInfo
++ m_cached_signals: std::unordered_map&lt;vehicle::SignalID, vehicle::SignalVariant&gt;
+
+- m_execThread: std::shared_ptr &lt;ThreadPool&gt;
+- m_instance: common32960 * static
+
+- m_mtx: std::mutex static
+- sequence_login: SMLK_UINT32
+- sequence_infoUp: SMLK_UINT32
+- m_SocketState: int
+--
+- common32960()
+- ~common32960()
+
++ getInstance(): common32960 * static
++ GetThreadPool(): std::shared_ptr &lt;ThreadPool&gt; 
+
++ setSocketState(in state:int): void
++ getSocketState(): int
++ getInfoUpTime32960(): int
++ setInfoUpTime32960(in value:SMLK_UINT16): void
++ initSequence(): void
++ getSequence(in b_in:bool): int
++ saveSequence(): void
++ setIgnState(in state:int ): void
++ getIgnState(): int
++ getThreeWarnFlag(): bool
++ setThreeWarnFlag(in value:bool ): void
++ initConfigParam(): void
++ setConfigParam(in param:PARAM_T &amp;): void
++ getConfigParam(): PARAM_T &amp; struct
++ getTimestamp(buffer: SMLK_UINT8 *): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1200</x><y>410</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>410</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element></diagram>

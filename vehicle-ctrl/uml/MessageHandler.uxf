@@ -1,0 +1,101 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1210&lt;/x&gt;&lt;y&gt;330&lt;/y&gt;&lt;w&gt;30&lt;/w&gt;&lt;h&gt;160&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;140;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;400&lt;/x&gt;&lt;y&gt;290&lt;/y&gt;&lt;w&gt;30&lt;/w&gt;&lt;h&gt;160&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;140;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;400&lt;/x&gt;&lt;y&gt;290&lt;/y&gt;&lt;w&gt;30&lt;/w&gt;&lt;h&gt;160&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;140;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;400&lt;/x&gt;&lt;y&gt;290&lt;/y&gt;&lt;w&gt;30&lt;/w&gt;&lt;h&gt;160&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;140;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;400&lt;/x&gt;&lt;y&gt;290&lt;/y&gt;&lt;w&gt;30&lt;/w&gt;&lt;h&gt;160&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;.&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;140;10;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;</help_text><element><id>UMLClass</id><coordinates><x>950</x><y>508</y><w>690</w><h>120</h></coordinates><panel_attributes>_IDissector_
+--
+using GetVinCallBack = std::function&lt;SMLK_BOOL(std::string&amp;)&gt;
+- m_get_vin_cb: GetVinCallBack
+--
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
++ RegisterGetVin(in cb:GetVinCallBack &amp;): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1730</x><y>488</y><w>700</w><h>140</h></coordinates><panel_attributes>_DissectorMsg0F3D_
+--
+--
+- DissectorMsg0F3D()
+
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
++ LockCarStatusReport(in xd_status:RctrlLckSatatusInfo &amp;): SMLK_RC
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>198</y><w>750</w><h>160</h></coordinates><panel_attributes>_DissectorMsg8F40_
+--
+--
++ DissectorMsg8F40()
++ ~DissectorMsg8F40()
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+
+- SendMsg0F40(in head:RemCtrlHead &amp;, in lock_prot:SMLK_UINT8 &amp;, in resp_type:SMLK_UINT8, in result:SMLK_UINT8): SMLK_RC
+- SendMsg0F40(in head:RemCtrlHead &amp;): SMLK_RC</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>778</y><w>750</w><h>350</h></coordinates><panel_attributes>_DissectorMsg8F41_
+--
+- m_map_cmd_result: std::map&lt;SMLK_UINT16, SMLK_UINT8&gt; 
+- m_rctrl_to_jtt808_cmd_map: std::map&lt;RctrlSetCmd, Jtt808Cmd, CmpMcuCmdKey&gt;
+- m_jtt808_to_mcu_map: std::map&lt;Jtt808Cmd, RctrlSetCmd, CmpJtt808CmdKey&gt; 
+--
++ DissectorMsg8F41()
++ ~DissectorMsg8F41()
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+
+- Msg8F41Door(in subcmd_id:SMLK_UINT8 , in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8F41Engine(in subcmd_id:SMLK_UINT8 , in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8F41AC(in subcmd_id:SMLK_UINT8 , in  param:SMLK_UINT8, in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8f41OriginalAC(in subcmd_id:SMLK_UINT8 , in  param:SMLK_UINT8, in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8f41IndptWarmAC(in subcmd_id:SMLK_UINT8 , in  param:SMLK_UINT8, in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8f41ParkingAC(in subcmd_id:SMLK_UINT8 , in  param:SMLK_UINT8, in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8F41Mirror(in subcmd_id:SMLK_UINT8 , in  param:SMLK_UINT8, in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8F41IdlingWarmUp(in subcmd_id:SMLK_UINT8 , in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): void
+- Msg8F41GuardSpeedLimit(in subcmd_id:SMLK_UINT8 , in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): SMLK_UINT8
+- Msg8F41FinancialLckCar(in subcmd_id:SMLK_UINT8 , in rctrl_cmd:RctrlSetCmd &amp;, in param_err_flag:bool &amp;): SMLK_UINT8
+- SendMsg0F41(in head:RemCtrlHead &amp;, in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;): SMLK_RC
+- SendMsg0F41(in head:RemCtrlHead &amp;, in indata:SMLK_UINT8 *, in SMLK_UINT16 &amp;, in loan_enable:SMLK_UINT8): SMLK_RC</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1300</x><y>200</y><w>750</w><h>160</h></coordinates><panel_attributes>_DissectorMsg8F42_
+--
+--
++ DissectorMsg8F42()
++ ~DissectorMsg8F42()
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+
+- SendMsg0F42(in head:RemCtrlHead &amp;, in cmd_id:SMLK_UINT8 &amp;, in result:SMLK_UINT8 &amp;): SMLK_RC
+- SendMsg0F42(in head:RemCtrlHead &amp;, in cmd_id:SMLK_UINT8 &amp;, in str:std::string &amp;): SMLK_RC
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1310</x><y>780</y><w>750</w><h>320</h></coordinates><panel_attributes>_DissectorMsg8F51_
+--
+- m_map_cmdid: std::map&lt;CmdStatus, Jtt808CmdStatus, CmpCmdKey&gt;
+- m_rcmd_jcmd_map: std::map&lt;SMLK_UINT16, SMLK_UINT8, CmpRCmdKey&gt;
+- m_seq_id: SMLK_UINT16
+--
++ DissectorMsg8F51()
++ ~DissectorMsg8F51()
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+
+- GetDoorStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetOriginalACStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetLicenseStatus(in cmd_from:RctrlCmdFrom, in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetLockcanStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetIndentpWarmAirStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetParkingAcStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetMailBoxStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetEngineModeStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetPowerModeStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- GetWakeupSourceStatus(in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;, in start_id:SMLK_UINT8, in num:SMLK_UINT8, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>850</x><y>350</y><w>290</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>270;160;270;60;10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1280</x><y>350</y><w>390</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;160;10;80;370;80;370;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1630</x><y>550</y><w>120</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>860</x><y>620</y><w>270</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>250;10;250;110;10;110;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>1280</x><y>620</y><w>390</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;110;370;110;370;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>440</y><w>900</w><h>260</h></coordinates><panel_attributes>_DissectorMsgTerminalParam_
+--
+- m_id_map: std::map&lt;SMLK_UINT32, jt808msg8103::ParamValue&gt;
+--
++ DissectorMsgTerminalParam()
++ ~DissectorMsgTerminalParam()
++ OnChanged(in SMLK_UINT16 &amp;, in SMLK_DOUBLE &amp;): SMLK_RC
++ ResultEncode(in RemoteCtrlResult &amp;): SMLK_RC
++ Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+
+- Msg8103Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in queue:RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+- Msg8104Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in queue:RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+- Msg8106Decode(in indata:SMLK_UINT8 *, in length:SMLK_UINT16 &amp;, in queue:RCtrlCmdQueue &amp;, in is_encode:SMLK_UINT8 &amp;): SMLK_RC
+- GetParamDefaultVaule(in param_name:std::string &amp;): SMLK_UINT32
+- GetParamVaule(in param_id:SMLK_UINT32 &amp;, in valueinfo:jt808msg8103::ParamValue &amp;, in output_vec:std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_RC
+- SetParamVaule(in param_id:SMLK_UINT32 , in param_len:SMLK_UINT8 , in param_value:SMLK_UINT8 *, in valueinfo:jt808msg8103::ParamValue &amp;): SMLK_UINT8
+- SendMsg0104(in head:RemCtrlHead &amp;): SMLK_RC
+- SendMsg0104(in head:RemCtrlHead &amp;, in param_id_vec:std::vector&lt;SMLK_UINT32&gt; &amp;): SMLK_RC</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>890</x><y>550</y><w>80</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element></diagram>

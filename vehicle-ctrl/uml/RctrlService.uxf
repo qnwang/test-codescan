@@ -1,0 +1,166 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;320&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;320&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;320&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;</help_text><element><id>UMLClass</id><coordinates><x>748</x><y>60</y><w>710</w><h>1840</h></coordinates><panel_attributes>_RemoteCtrlService_
+--
++ m_rctrl_result: SMLK_UINT8
++ m_rctrl_cmd_result: SMLK_UINT16
+
+- m_mcu_seq: SMLK_UINT16
+- m_cmd_queue: Queue&lt;RCtrlCmdQueue&gt;
+- m_loan_cmd_queue: Queue&lt;RCtrlCmdQueue&gt;
+- m_msg_queue: Queue&lt;RCtrlMsgQueue&gt;
+- m_cv: std::condition_variable
+- m_cv_mtx: std::mutex
+- m_finacial_cv: std::condition_variable
+- m_finacial_mtx: std::mutex
+- m_finacial_result: LoanActiveResult
+- m_awaken_cv: std::condition_variable
+- m_awaken_mtx: std::mutex
+- m_mutex: std::mutex
+- m_map_prot_dissect: std::map&lt;SMLK_UINT32, std::shared_ptr&lt;IDissector&gt;&gt; 
+- m_map_cmd_status: std::map&lt;SMLK_UINT16, ChangedStatusInfo&gt; 
+- m_rctl_vd_map: std::map&lt;SMLK_UINT16, SMLK_UINT32&gt;
+- m_vd_rctl_map: std::map&lt;SMLK_UINT32, SMLK_UINT16&gt;
+- m_rctl_mcu_map: std::map&lt;RctrlSetCmd, std::vector&lt;RemoteCtrlMcuCmd&gt;, CmpRctrlCmdKey&gt;
+- m_flags: SMLK_UINT32
+- m_msg_thread: std::thread
+- m_cmd_thread: std::thread
+- m_loan_thread: std::thread
+- m_awaken_thread: std::thread
+- m_offline_ctrl_thread: std::thread
+- i_wakeup_source: WakeupSource
+- i_wakeup_source_before: WakeupSource
+- i_engine_state: EngineMode
+- i_engine_state_before: EngineMode
+- i_power_state: PowerMode
+- i_power_state_before: PowerMode
+- i_activate_state: ActivateStatus
+- i_verify_state: VerifyStatus
+- i_initiative_lock_state: LockStatus
+- i_passive_lock_state: LockStatus
+- m_ems_model: SMLK_UINT8
+- m_vcu_model: SMLK_UINT8
+- m_vehicle_type: SMLK_UINT8
+- is_lckcar_accon: SMLK_UINT8
+- m_ignon_flag: std::atomic&lt;bool&gt;
+- m_4gAntenna_flag: std::atomic&lt;bool&gt;
+- m_gpsAntenna_flag: std::atomic&lt;bool&gt;
+- m_activeReport_flag: std::atomic&lt;bool&gt;
+- is_first_4gAntenna_flag: SMLK_UINT32
+- is_first_gpsAntenna_flag: SMLK_UINT32
+- m_ignofflck_flag: SMLK_UINT8
+- m_seed: std::vector&lt;SMLK_UINT8&gt;
+- m_loan_flag: std::vector&lt;SMLK_UINT8&gt;
+- m_vin: std::vector&lt;SMLK_UINT8&gt;
+- m_ein: std::vector&lt;SMLK_UINT8&gt;
+- m_checkcode: std::vector&lt;SMLK_UINT8&gt;
+- m_cur_uds_did: SMLK_UINT16 
+- m_cur_service_id: SMLK_UINT16 
+- m_sp_awaken_evt: std::shared_ptr&lt;Poco::Event&gt; 
+- m_sp_offlinectrl_evt: std::shared_ptr&lt;Poco::Event&gt; 
+- fur_wakeup_send_idle: std::future&lt;void&gt; 
+--
++ RemoteCtrlService();
++ ~RemoteCtrlService();
++ Init(): SMLK_RC
++ Start(): SMLK_RC
++ Stop(): void
++ IsRunning(): bool const
++ OnLocationSerIndication(in id:smartlink_sdk::LocationEventId, in data:void *, in len:int): void
++ OnMcuSerIndication(in id:smartlink_sdk::McuEventId, in data:void *, in len:int): void
++ OnTelIndication(in id:smartlink_sdk::TelEventId, in data:void *, in len:int): void
++ OnVehicleChangedIndication(in data:VehicleData): void
++ OnEngineChangedIndication(in data:VehicleData): void
++ OnTspIndication(in IpcTspHead &amp;ipc_head, in void* data, std::size_t len): void
++ OnSysPowerSerIndication(smartlink_sdk::SysPowerEventID id, void*data, int len): void	
++ WakeupSendVehicleStatus(): SMLK_RC
++ WakeupSendIdlingWarmMsg(): SMLK_RC
++ GetVinFromEcu(in vin:SMLK_UINT8 *, in len:SMLK_UINT8 *): SMLK_RC
+		
+- GetEinFromEcu(in pein:SMLK_UINT8 *, in ein_len:SMLK_UINT8 &amp;): void
+- GetFinacialLckFlgFromEcu(in lck_active_status:SMLK_UINT8 &amp;): void
+- ThreadMsgProcess(void): SMLK_RC
+- ThreadCmdQueueProcess(void): SMLK_RC
+- ThreadLoanProcess(void): SMLK_RC
+- ProcessTspMessage(in msg_queue:RCtrlMsgQueue &amp;, in dissector:std::shared_ptr&lt;IDissector&gt; &amp;): SMLK_RC
+- PreProcessVehicleStatusChanged(in msg_queue:RCtrlMsgQueue &amp;): SMLK_RC
+- ProcessVehicleStatusChanged(in dissector:std::shared_ptr&lt;IDissector&gt; &amp;): SMLK_RC
+- ProcessRctrlCmd(in rctrl_cmd:RctrlSetCmd &amp;, in config_info:RemoteCtrlConfigFileInfo &amp;, in result:SMLK_UINT16 &amp;): SMLK_RC
+- ProcessRctrlCmd(in rctrl_cmd:RctrlSetCmd &amp;, in result:SMLK_UINT16 &amp;): SMLK_RC
+- ProcessMcuSerResp(in data:void *, in length:int): void
+- ConfigRCtrlCmdList(in rctrl_cmd_vec:std::vector&lt;RctrlSetCmd&gt; &amp;, in result_vec:std::vector&lt;RctrlSetCmdResult&gt; &amp;): SMLK_RC
+- QueryVehicalDataCmdList(in cmd_vec:std::vector&lt;SMLK_UINT16&gt; &amp;, in result_vec:std::vector&lt;RctrlGetCmd&gt; &amp;): SMLK_RC
+- ProcessRCtrlResultList(in result:RemoteCtrlResult &amp;): SMLK_RC
+- GetRctrlHeadFromIpcHead(in ipc_head:IpcTspHead &amp;, in rctrl_head:RemCtrlHead &amp;): void
+- InitRctrlToVdMap(): SMLK_RC
+- VdToRCtrlValueMap(in vehicle_index:SMLK_UINT32, in vehicle_data:SMLK_DOUBLE , in vechile_valid:bool, in rctrl_get_cmd:RctrlGetCmd &amp;);: SMLK_RC
+- InitRctrlToMcuMap(): SMLK_RC
+- InitRctrlStatusFile(): SMLK_RC
+- GetLastLockMsgWhenIgnon(in cmd_queue:RCtrlCmdQueue &amp;): void
+- GetLckCarStatusAndSendStatus(in flag:bool): void
+- GetLckStatusInfo(in RctrlLckSatatusInfo &amp;, in flag:bool): void
+- SendLckCarStatus(in xd_status:RctrlLckSatatusInfo &amp;): void
+- SendRctrlCmdToMcu(in rctrl_cmd:RctrlSetCmd &amp;): SMLK_RC
+- Pack8f41MsgLckFunc(in data:void *, in len:int, in msg_queue:RCtrlMsgQueue ): void
+- Pack8f40MsgLckActive(in data:void *, in len:int, in msg_queue:RCtrlMsgQueue ): void
+- Pack8f40MsgLckUnlock(in data:void *, in len:int, in msg_queue:RCtrlMsgQueue ): void
+- Pack8f40MsgLckQuery(in data:void *, in len:int, in msg_queue:RCtrlMsgQueue ): void
+- Pack8103Msg4GAnt(in data:void *, in len:int , in msg_queue:RCtrlMsgQueue ): void
+- Pack0F40MsgQuery(in reslut:GetVinEinFlagResult): void
+- GetVinEinFlagResult GetVinEinFlagFromEcu(in pvin:SMLK_UINT8 *, in pein:SMLK_UINT8 *, in lck_active_status:SMLK_UINT8 &amp;);
+- EnterUDSMode(): SMLK_RC
+- ExitUDSMode(): SMLK_RC
+- SendUdsCmd(in request_id:SMLK_UINT32 , in response_id:SMLK_UINT32 , in service_id:SMLK_UINT16 , in did:SMLK_UINT16 , in data_len:int, in data:char*): SMLK_RC
+- FinacailSendExterndMode(): SMLK_RC
+- FinacailGetSeedRequest(): SMLK_RC
+- FinacailWriteFlag(in action:SMLK_UINT8 &amp;): SMLK_RC
+- FinacailReadFlag(in flag:SMLK_UINT8 &amp;): SMLK_RC
+- FinacailCheckCode(): SMLK_RC
+- FinacailCheckCodeProcess(in flag:bool ): SMLK_RC
+- Send4GantennaState(in state:SMLK_UINT8 ): void
+- ProcessFinacialActive(in action:SMLK_UINT8, in result:SMLK_UINT16 &amp;): SMLK_RC
+- FinacailSendUdsSeedkey(): SMLK_RC
+- ProcessUdsConfigResp(in data:void *, in len:int): void
+- ThreadAwakenProcess(void): void
+- ThreadOfflineProcess(void): void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>220</y><w>660</w><h>190</h></coordinates><panel_attributes>_RctrlConfigJsonFile_
+--
+--
++ GetInstance(): RctrlConfigJsonFile * static
++ gbk_to_utf8(in inbuf:char *, in inlen:size_t, in outbuf:char *, in outlen:size_t): SMLK_RC
++ utf8_to_gbk(in inbuf:char *, in inlen:size_t, in outbuf:char *, in outlen:size_t): SMLK_RC
++ string_to_hex(in string:std::string, in cbuf:SMLK_UINT8 *, in buflen:SMLK_UINT8): SMLK_RC
++ InitStatusJsonFile(in path_name:std::string &amp;): SMLK_RC
++ GetValueFromJsonFile(in name:std::string &amp;, in value:std::string &amp;, in file_location:std::string &amp;=VEHICLE_CTRL_STATUS_FILE_PATH_NAME): SMLK_RC
++ SetValueToJsonFile(in name:std::string &amp;, in value:std::string &amp;, in file_location:std::string &amp;=VEHICLE_CTRL_STATUS_FILE_PATH_NAME): SMLK_RC
+
+- RctrlConfigJsonFile()
+- ~RctrlConfigJsonFile()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>460</y><w>660</w><h>130</h></coordinates><panel_attributes>_RemoteCtrlCmdLoad_
+--
+--
++ RemoteCtrlCmdLoad()
++ ~RemoteCtrlCmdLoad()
++ ReadCmdConfigFile(): SMLK_RC
++ GetVehicleTypeFileScript(in file_loction:std::string &amp;): SMLK_RC
++ LinkAlgorithmLibrary(in file:std::string): SMLK_RC
++ GetFinacialDiagnoseScript(in file:std::string): SMLK_RC</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>670</y><w>230</w><h>170</h></coordinates><panel_attributes>_RCtrlCmdQueue_
+--
++ m_head: RemCtrlHead 
++ m_cmd_from: RctrlCmdFrom 
++ m_cmd_type: RctrlCmdType 
++ m_version: SMLK_UINT8 
++ m_lock_prot: SMLK_UINT8 
++ query_queue: QueryQueue
++ config_queue: ConfigQueue
+--
++ RCtrlCmdQueue()
++ ~RCtrlCmdQueue()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>900</y><w>230</w><h>170</h></coordinates><panel_attributes>_RemoteCtrlResult_
+--
++ m_head: RemCtrlHead 
++ m_cmd_from: RctrlCmdFrom 
++ m_result_type: RctrlCmdType 
++ m_version: SMLK_UINT8 
++ m_lock_prot:SMLK_UINT8 
++ query_result: QueryReuslt
++ config_result: ConfigReuslt
+--
++ RemoteCtrlResult()
++ ~RemoteCtrlResult()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>670</x><y>520</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>850</y><w>410</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>390;10;120;10;120;100;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>690</y><w>410</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>390;10;110;10;110;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>670</x><y>310</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element></diagram>

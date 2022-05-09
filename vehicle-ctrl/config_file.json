@@ -1,0 +1,76 @@
+{"configfile":
+[	{
+		"default_timeout": 5,
+		"default_retrytimes": 0,
+		"default_retrydelay": 10,
+		"default_reportdelay":5
+	},
+	{
+		"cmd": 25,
+		"subcmd":[],
+		"timeout": 40,
+		"max_sendtimes":1,
+		"retrydelay": 5,
+		"params": [
+			{
+			"errcode": 1,
+			"retrytimes": 3
+			},
+			{
+		        "errcode": 255,
+                "retrytimes": 5
+
+			}]
+	},
+	{
+		"cmd": 2,
+		"subcmd":[],
+        "timeout": 5,
+        "max_sendtimes":2,
+        "retrydelay": 1,
+        "params": [
+        	{
+                "errcode": 1,
+                "retrytimes": 2
+       		},
+			{		
+                "errcode": 255,
+                "retrytimes": 3
+			}]
+	},
+	{
+		"cmd": 1000,
+		"subcmd":[1,2],
+        "timeout": 5,
+        "max_sendtimes":2,
+        "retrydelay": 1,
+        "params": [
+			{
+                "errcode": 1,
+                "retrytimes": 2
+       		},
+        	{
+                "errcode": 255,
+                "retrytimes": 3
+        	}]
+	},
+	{
+		"cmd": 1002,
+		"subcmd":[32,33,34,35,36],
+        "timeout": 5,
+        "max_sendtimes":2,
+        "retrydelay": 1,
+        "params": [
+			{
+                "errcode": 1,
+                "retrytimes": 2
+       		},
+        	{
+                "errcode": 255,
+                "retrytimes": 3
+        	}]
+	}	]
+	
+}
+
+

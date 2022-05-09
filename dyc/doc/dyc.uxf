@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>160</y>
+      <w>490</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>CallableEvent
+--
+-m_head: MsgHead
+-m_data: std::vector&lt;SMLK_UINT8&gt;
+-m_func: std::function&lt;void (IN MsgHead &amp;, IN std::vector&lt;SMLK_UINT8&gt; &amp;)&gt;
+--
++CallableEvent(IN MsgHead &amp;head, IN SMLK_UINT8 *data, std::size_t sz, Func func)
++CallableEvent(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data, Func func)
++CallableEvent(IN MsgHead &amp;head, std::vector&lt;SMLK_UINT8&gt; &amp;&amp;data, Func func)
++CallableEvent(IN CallableEvent &amp;other)
++operator=(IN CallableEvent &amp;other)
++operator()()：void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>325</y>
+      <w>205</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>MsgHead
+--
+-m_id: SMLK_UINT32
+-m_seq: SMLK_UINT32
+-m_protocol: SMLK_UINT32
+-m_compress: SMLK_UINT32 
+-m_length: SMLK_UINT32
+-m_extra: SMLK_UINT32 
+--
++MsgHead(SMLK_UINT32 id, SMLK_UINT32 seq, SMLK_UINT8 protocol, SMLK_UINT8 compress, SMLK_UINT16 length, SMLK_UINT32 extra)
++MsgHead(IN MsgHead &amp;)
++operator=(const MsgHead &amp;): MsgHead &amp;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>550</y>
+      <w>195</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>template=T: Class
+Queue
+--
+-m_queue: std::queue&lt;T&gt;
+-m_mutex: mutable std::mutex
+-m_condition: std::condition_variable
+--
++put(IN T &amp;t)
++get(int timeout_ms = -1, bool *timeout_ptr = nullptr)
++operator bool()
++empty(): bool const
++size():std::size_t const</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>0</y>
+      <w>375</w>
+      <h>850</h>
+    </coordinates>
+    <panel_attributes>DynamicCollectionService
+--
+-m_flags: SMLK_UINT32
+-m_internal_flags: SMLK_UINT32
+-m_timer_flags: SMLK_UINT32
+-m_report_period: SMLK_UINT32
+-m_seq: SMLK_UINT32
+-m_clock_id: std::string
+-m_mutex: std::mutex
+-m_thread: std::thread
+-m_dm1_thread: std::thread
+-m_compress_mutex: std::mutex
+-m_compress_thread: std::thread
+-m_timer: Timer
+-m_timer_long_miss: Timer
+-m_timer_shared: Timer
+-m_frequency_value: std::unordered_map&lt;SMLK_UINT8, SMLK_UINT32&amp;&gt;
+-m_events：Queue&lt;CallableEvent&gt;
+-m_dm1_events: Queue&lt;CallableEvent&gt;
+-m_compress_events:
+-Queue&lt;CallableEvent&gt;:
+-m_protocols: std::vector&lt;SMLK_UINT8&gt;
+-m_protocol_messages: std::unordered_map&lt;SMLK_UINT8, ProtocolMessage&gt;
+-m_cached_tires: std::unordered_map&lt;std::uint8_t, std::shared_ptr&lt;IMessage&gt;&gt;
+-m_cached_signals: std::unordered_map&lt;vehicle::SignalID, vehicle::SignalVariant&gt;
+-m_cached_index_signals: std::unordered_map&lt;std::uint32_t, vehicle::SignalVariant &amp;&gt;
+-m_cached_tires_signals: std::unordered_map&lt;std::uint32_t, vehicle::SignalVariant &amp;&gt;
+-m_cached_tires_ext_signals: std::unordered_map&lt;std::uint32_t, vehicle::SignalVariant &amp;&gt;
+-m_message_decode_map_mutex: std::mutex
+-g_message_decode_map: MessageDecodeMap
+-g_vehicle_data_pool_mutex: std::mutex
+-g_vehicle_data_pool: std::unordered_map&lt;SMLK_UINT32, CanFormatData::CanPhysicalDataInfo&gt;
+-m_cached_signals: std::unordered_map&lt;SMLK_UINT32, SignalFormat&gt;
+-m_vec_signals: std::unordered_map&lt;SMLK_UINT32, vehicle::SignalVariant&gt;
+-m_gnss_signals: std::unordered_map&lt;SMLK_UINT32, vehicle::SignalVariant&gt;
+-m_dbc_config_mutex: std::mutex
+-m_dbc_config: std::unordered_map&lt;SMLK_UINT32, DbcConfigFormat&gt;
+-m_dbc_sample_siganls_mutex: std::mutex
+-m_dbc_sample_signals_map: std::unordered_map&lt;SMLK_UINT32, std::vector&lt;SMLK_UINT32&gt;&gt;
+-m_sampled_signals: std::unordered_map&lt;SMLK_UINT32, SignalFormat&gt;
+-m_sampled_frame_mutex: std::mutex
+-m_sampled_frame_signals: std::unordered_map&lt;SMLK_UINT32, std::vector&lt;std::unordered_map&lt;SMLK_UINT32, SignalFormat&gt;&gt;&gt;
+-m_compressed: std::vector&lt;SMLK_UINT8&gt;
+-m_sampling_frequency: SMLK_UINT16
+-m_crompression: SMLK_UINT8
+-m_frameLimit_mutex: std::mutex
+-m_current_frameLimit: SMLK_UINT32
+-m_upload_data_type: SMLK_UINT8
+-m_signal_day_vehicle_distance: vehicle::SignalVariant
+-m_signal_total_vehicle_distance: vehicle::SignalVariant
+-m_signal_ecu_total_distacne: vehicle::SignalVariant
+-m_signal_day_fuel_used：vehicle::SignalVariant
+-m_signal_total_fuel_used：vehicle::SignalVariant
+-m_signal_ecu_total_fuel_used：vehicle::SignalVariant
+--
++ Init(): std::uint32_t
++Start(): std::uint32_t
++Stop(): void
++IsRunning(): bool const
++Post(IN MsgHead &amp;head, IN SMLK_UINT8 *ptr, IN std::size_t sz): void
++Post(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;data): void
++Post(IN MsgHead &amp;head, INOUT std::vector&lt;std::uint8_t&gt; &amp;&amp;data): void
++PostDM1(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;data): void
++PostDM1(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;&amp;data): void
++PostDM1(IN MsgHead &amp;head, IN std::uint8_t *data, IN std::size_t sz):void
+-HandleEvent(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;data):void
+-OnMcuNotify(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;data): void
+-OnLocation(IN MsgHead &amp;head, IN std::vector&lt;std::uint8_t&gt; &amp;data): void
+-OnIgnOn(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnIgnOff(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnCanBusWakeup(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnCanBusSleep(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-CompressPost(IN MsgHead &amp;head, INOUT std::vector&lt;SMLK_UINT8&gt; &amp;&amp;data): void
+-GetGNSS(): void
+-OnLocation(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnTimer(IN std::uint32_tid, IN std::uint32_t param): void
+-OnDycConfig(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnTspSetDycInterval(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;tsp_data): void
+-ResponseTspSetDycInterval(IN MsgHead &amp;head): void
+-HttpGet(std::string &amp;address, std::string &amp;true_name): SMLK_INT8
+-OnTspReadDycConfig(IN MsgHead &amp;head): void
+-ResponseTspReadDycConfig(IN MsgHead &amp;head): void
+-OnTspClearDycConfig(IN std::vector&lt;SMLK_UINT8&gt; &amp;data): bool
+-ResponseTspClearDycConfig(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;tsp_data): void
+-SendTspCommonResponse(IN MsgHead &amp;head,IN SMLK_UINT8 &amp;result): void
+-DoExecuteClearDbcConfig(IN std::vector&lt;string&gt; &amp;str_vec): bool
+-CheckSampleCondition(IN MsgHead &amp;head): void
+-SampleSignalsByDbcIndex(IN MsgHead &amp;head, IN DBC_INDEX &amp;index): void
+-InitVehicleDataPool(): void
+-CanFrameAceept(const CanFormatData::CanFrame* can_frame): void
+-ProcessNormalCanFrame(const CanFormatData::CanFrame* can_frame, const std::vector&lt;SignalFormat&gt; &amp;vec_signals): void
+-ProcessPhysicalData(Index index, CanFormatData::CanPhysicalDataInfo&amp; info): void
+-OnCanDatachanged(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-onNewDbcSet(IN MsgHead &amp;head): void
+-LoadDbcConfigByIndex(IN DBC_INDEX &amp;index): void
+-UpdateDbcConfigByIndex(IN DBC_INDEX &amp;index, IN dbc_config_struct &amp;info): void
+-CompressOffset(): std::size_t
+-write_data(void *ptr, size_t size, size_t nmemb, void *stream): size_t
+-OnDataChanged(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-OnZipNotify(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-InitSearchDbcConfig(): void
+-BuildAndUpdateMaps(): void
+-OnCompress(IN MsgHead &amp;head, IN std::vector&lt;SMLK_UINT8&gt; &amp;data): void
+-Encode(std::vector&lt;SMLK_UINT8&gt; &amp;data , IN DBC_INDEX &amp;index): SMLK_UINT32
+-std::uint32_t EncodeZip(std::vector&lt;SMLK_UINT8&gt; &amp;data): SMLK_UINT32</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>465</y>
+      <w>360</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ConfigLoader
+--
+--
++NewLoadConfigFromDBCFile(SMLK_UINT32 &amp;dbc_index, std::unordered_map&lt;SMLK_UINT32, std::vector&lt;SMLK_UINT32&gt;&gt; *dbc_sample_signals_map, MessageDecodeMap *message_decode_map): void
++LoadConfigFromDBCFile(MessageDecodeMap *message_decode_map); void
++GetDbcPath(DBC_INDEX &amp;dbc_index): std::string
+-GetDBCVersion(): SMLK_UINT32</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>485</x>
+      <y>195</y>
+      <w>75</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>250</y>
+      <w>15</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>485</x>
+      <y>490</y>
+      <w>75</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>585</y>
+      <w>80</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>650</y>
+      <w>205</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>DbcConfigFormat
+--
+-m_dbc_name: std::string
+-m_dbc_md5sum: std::string
+-m_dbc_http_url: std::string
+-m_upload_id: SMLK_UINT16
+-m_collection_interval: SMLK_UINT16
+-m_upload_interval: SMLK_UINT16
+-m_data_type: SMLK_UINT8
+--
++setDbcName(IN std::string &amp;name)
++getDbcName(): std::string
++setHttpUrl(IN std::string &amp;url): void
++getHttpUrl(): std::string
++setUploadId(IN SMLK_UINT16 &amp;uploadId): void
++setFileMd5(IN std::string &amp;md5): void
++getFileMd5(): std::string
++getUploadId():SMLK_UINT16
++setCollectionTnterval(IN SMLK_UINT16 &amp;): void
++getCollectionTnterval(): SMLK_UINT16
++setUploadInterval(IN SMLK_UINT16 &amp;): void
++getUploadInterval(): SMLK_UINT16
++setUploadDataType(IN SMLK_UINT8 &amp;): void
++getUploadDataType(): SMLK_UINT8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>730</y>
+      <w>80</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

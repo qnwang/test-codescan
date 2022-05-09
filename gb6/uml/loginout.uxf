@@ -1,0 +1,100 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>662</x><y>640</y><w>630</w><h>330</h></coordinates><panel_attributes>_SignalVariant_
+--
+- m_id: std::uint32_t
+- m_bits: int
+- m_signed: bool
+- m_valid: bool
+- m_factor: double
+- m_offset: double
+- m_min: double
+- m_max: double
+- m_val: double
+--
++ SignalVariant(id:std::uint32_t, bits:int, factor:double =1.0, offset:double =0.0, min:double = 0.0, max:double = 0.0)
++ SignalVariant(in other:SignalVariant &amp;)
++ ~SignalVariant()
++ Valid(): bool const
++ Val(): double const 
++ Min(): double const
++ Max(): double const
++ IsInteger(): bool const
++ operator=(in val:double): SignalVariant &amp;
++ operator=(in other:SignalVariant &amp;): SignalVariant &amp;
++ Encoded(): std::uint32_t const</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1432</x><y>540</y><w>500</w><h>90</h></coordinates><panel_attributes>_IMessage_
+--
+--
++ Encode(inout encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32  const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32 
++ Duplicate(): std::shared_ptr&lt;IMessage&gt; const
++ EncodedSize(): std::size_t const</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1664</x><y>620</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1434</x><y>700</y><w>500</w><h>200</h></coordinates><panel_attributes>_MessageVehicleLogin_
+--
++ m_timestamp: vehicle::SignalVariant
++ m_seq: SMLK_UINT16
++ m_iccid: std::string
+--
++ MessageVehicleLogin()
++ ~MessageVehicleLogin()
+
++ Encode(encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32 const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32
++ Duplicate(): std::shared_ptr&lt;IMessage&gt; const
++ EncodedSize(): std::size_t const
++ operator=(in other:MessageVehicleLogin &amp;): MessageVehicleLogin &amp;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1434</x><y>970</y><w>500</w><h>140</h></coordinates><panel_attributes>_MessageVehicleLogin17691_
+--
+--
++ MessageVehicleLogin17691()
++ ~MessageVehicleLogin17691()
+
++ Encode(encode::std::vector&lt;SMLK_UINT8&gt; &amp;) : SMLK_UINT32 const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;) : SMLK_UINT32
++ Duplicate() : std::shared_ptr&lt;IMessage&gt; const;
++ EncodedSize() : std::size_t const;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1674</x><y>890</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>62</x><y>710</y><w>450</w><h>180</h></coordinates><panel_attributes>_MessageVehicleLogout_
+--
++ m_timestamp: vehicle::SignalVariant
++ m_seq: SMLK_UINT16
+--
++ MessageVehicleLogout()
++ ~MessageVehicleLogout()
+
++ Encode(encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32 const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32
++ Duplicate(): std::shared_ptr&lt;IMessage&gt; const
++ EncodedSize(): std::size_t const
++ operator=(in other:MessageVehicleLogout &amp;): MessageVehicleLogout &amp;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>62</x><y>970</y><w>450</w><h>140</h></coordinates><panel_attributes>_MessageVehicleLogout17691_
+--
+--
++ MessageVehicleLogout17691()
++ ~MessageVehicleLogout17691()
+
++ Encode(encode::std::vector&lt;SMLK_UINT8&gt; &amp;) : SMLK_UINT32 const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;) : SMLK_UINT32
++ Duplicate() : std::shared_ptr&lt;IMessage&gt; const;
++ EncodedSize() : std::size_t const;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>540</y><w>450</w><h>90</h></coordinates><panel_attributes>_IMessage_
+--
+--
++ Encode(inout encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32  const
++ Decode(in encode::std::vector&lt;SMLK_UINT8&gt; &amp;): SMLK_UINT32 
++ Duplicate(): std::shared_ptr&lt;IMessage&gt; const
++ EncodedSize(): std::size_t const</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>502</x><y>780</y><w>180</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;160;10</additional_attributes></element><element><id>Relation</id><coordinates><x>242</x><y>620</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>242</x><y>880</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2045</x><y>600</y><w>630</w><h>330</h></coordinates><panel_attributes>_SignalVariant_
+--
+- m_id: std::uint32_t
+- m_bits: int
+- m_signed: bool
+- m_valid: bool
+- m_factor: double
+- m_offset: double
+- m_min: double
+- m_max: double
+- m_val: double
+--
++ SignalVariant(id:std::uint32_t, bits:int, factor:double =1.0, offset:double =0.0, min:double = 0.0, max:double = 0.0)
++ SignalVariant(in other:SignalVariant &amp;)
++ ~SignalVariant()
++ Valid(): bool const
++ Val(): double const 
++ Min(): double const
++ Max(): double const
++ IsInteger(): bool const
++ operator=(in val:double): SignalVariant &amp;
++ operator=(in other:SignalVariant &amp;): SignalVariant &amp;
++ Encoded(): std::uint32_t const</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1925</x><y>740</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;10</additional_attributes></element></diagram>

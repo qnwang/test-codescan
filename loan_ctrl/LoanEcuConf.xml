@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EcuInfos>
+    <EcuItem mark="" default="0x02" name="EMS" index="0">
+        <Item name="EMS_5" active="false"><!--FAW 国五柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x01</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_6" active="true" tbd="true"><!--FAW 国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x02</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>LoanCheckCode</Fuction>
+            </OverWriteFunctions>
+            <EncryptLibrary>
+                <LibraryPath>libEMS_Seedkey_Algorithm.so</LibraryPath> <!-- default append with /oemapp/smartlink/lib/-->
+                <EncryptFunctionName>seedToKey</EncryptFunctionName>
+            </EncryptLibrary>
+        </Item>
+        <Item name="EMS_Bosch" active="false"><!--Bosch 国五柴油机 762-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x03</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_Bosch_NG" active="true"><!--Bosch 国六天然气-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x04</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xAA01" remark=""/>
+            <LoanReadDiD did="0xAA06" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0xAA06" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_Econtrol" active="true" tbd="true"><!--Econtrols 国六天然气-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x05</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF80D" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>GetSeedRequest</Fuction>
+                <Fuction>UploadKey</Fuction>
+            </OverWriteFunctions>
+            <EncryptLibrary>
+                <LibraryPath>libEControl_Seedkey_Algorithm.so</LibraryPath> <!-- default append with /oemapp/smartlink/lib/-->
+                <EncryptFunctionName>seedToKey_EControl</EncryptFunctionName>
+            </EncryptLibrary>
+        </Item>
+        <Item name="EMS_CUMMINS" active="false"><!--康明斯国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x06</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_CUMMINS_NG" active="false"><!--康明斯国六天然气-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x07</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_WISE" active="false"> <!--潍柴国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x08</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_WISE_NG" active="false"><!--潍柴国六天然气-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x09</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_YUCHAI" active="false"><!--玉柴国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x0A</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_YUCHAI_NG" active="false"><!--玉柴国六天然气-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x0B</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_QUANCHAI" active="false"><!--全柴国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x0C</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+        <Item name="EMS_YUNNEI" active="false"><!--云内国六柴油机-->
+            <PhyAddr>0x18DA00F1</PhyAddr>
+            <RespId>0x18DAF100</RespId>
+            <HexIndex>0x0D</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="0xF1A6" remark=""/>
+            <LoanReadDiD did="0x0209" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x0209" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="1">0x01</LoanActive>
+            <LoanInActive bytes="1">0x00</LoanInActive>
+        </Item>
+    </EcuItem>
+    <EcuItem mark="" default="0x00" name="VCU" index="3">
+        <Item name="VCU_FAW" active="true" tbd="true"><!--传统车&智能车 恒润/自主-->
+            <PhyAddr>0x18DA27F1</PhyAddr>
+            <RespId>0x18DAF127</RespId>
+            <HexIndex>0x01</HexIndex>
+            <VinDiD did="" remark="invaild"/>
+            <EinDiD did="" remark="invaild"/>
+            <LoanReadDiD did="0x0195" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x1012" svc_id="0x2F" remark=""/>
+            <LoanActive bytes="2">0x0301</LoanActive>
+            <LoanInActive bytes="2">0x0300</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>DoLoanCmd</Fuction>
+            </OverWriteFunctions>
+            <EncryptLibrary>
+                <LibraryPath>libEMS_Seedkey_Algorithm.so</LibraryPath> <!-- default append with /oemapp/smartlink/lib/-->
+                <EncryptFunctionName>seedToKey</EncryptFunctionName>
+            </EncryptLibrary>
+        </Item>
+        <Item name="HCU_FAW" active="true" tbd="true">
+            <PhyAddr>0x18DA27F1</PhyAddr>
+            <RespId>0x18DAF127</RespId>
+            <HexIndex>0x02</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="" remark="invaild"/>
+            <LoanReadDiD did="0xF1A7" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0xF1A7" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="2">0x0001</LoanActive>
+            <LoanInActive bytes="2">0x0000</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>DoLoanCmd</Fuction>
+            </OverWriteFunctions>
+            <EncryptLibrary>
+                <LibraryPath>libEMS_Seedkey_Algorithm.so</LibraryPath> <!-- default append with /oemapp/smartlink/lib/-->
+                <EncryptFunctionName>seedToKey</EncryptFunctionName>
+            </EncryptLibrary>
+        </Item>
+        <!--新能源车-->
+        <Item name="HCU_BOSCH" active="true" tbd="true">
+            <PhyAddr>0x18DA27F1</PhyAddr>
+            <RespId>0x18DAF127</RespId>
+            <HexIndex>0x03</HexIndex>
+            <VinDiD did="0xF190" remark=""/>
+            <EinDiD did="" remark="invaild"/>
+            <LoanReadDiD did="0x0195" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x1012" svc_id="0x2E" remark=""/>
+            <LoanActive bytes="2">0x0001</LoanActive>
+            <LoanInActive bytes="2">0x0000</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>DoLoanCmd</Fuction>
+            </OverWriteFunctions>
+        </Item>
+        <Item name="VCU_QingD" active="false" tbd="true">
+            <PhyAddr>0x18DA27F1</PhyAddr>
+            <RespId>0x18DAF127</RespId>
+            <HexIndex>0x04</HexIndex>
+            <VinDiD did="" remark="invaild"/>
+            <EinDiD did="" remark="invaild"/>
+            <LoanReadDiD did="0x0195" svc_id="0x22" remark=""/>
+            <LoanWriteDiD did="0x1012" svc_id="0x2F" remark=""/>
+            <LoanActive bytes="2">0x0301</LoanActive>
+            <LoanInActive bytes="2">0x0300</LoanInActive>
+            <OverWriteFunctions>
+                <Fuction>DoLoanCmd</Fuction>
+            </OverWriteFunctions>
+        </Item>
+    </EcuItem>
+</EcuInfos>
